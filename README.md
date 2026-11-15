@@ -28,3 +28,10 @@ Code that groups values by key usually starts as a plain `dict` of `list`, and t
 - `MultiValueMap` — the only public class, exported from `mini_multi_value_map`.
 
 Methods: `append(key, value)`, `get(key)`, `remove_value(key, value)`, `remove_all(key)`, plus `__getitem__`, `__setitem__`, `__delitem__`, `__contains__`, `__iter__`, `__len__`, `__eq__`, `__repr__`, `keys()`, `items()`, `values()`.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
